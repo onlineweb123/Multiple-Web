@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #ececec; }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin: 50px auto;
+        }
+        input, textarea, button {
+            display: block;
+            margin: 10px auto;
+            padding: 10px;
+            width: 90%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Panel</h1>
+        
+        <label>தலைப்பு மாற்ற:</label>
+        <input type="text" id="titleInput" placeholder="Enter title">
+        
+        <label>பட Upload:</label>
+        <input type="file" id="imageInput">
+        
+        <label>WhatsApp Number:</label>
+        <input type="text" id="whatsappNumberInput" placeholder="Enter WhatsApp Number">
+        
+        <label>WhatsApp Message:</label>
+        <input type="text" id="whatsappTextInput" placeholder="Enter WhatsApp Text">
+        
+        <label>விவரிப்பு (Description):</label>
+        <textarea id="descriptionInput" rows="3" placeholder="Enter description"></textarea>
+
+        <button onclick="updateData()">Update</button>
+    </div>
+
+    <script>
+        function updateData() {
+            const title = document.getElementById("titleInput").value;
+            const description = document.getElementById("descriptionInput").value;
+            const whatsappNumber = document.getElementById("whatsappNumberInput").value;
+            const whatsappText = document.getElementById("whatsappTextInput").value;
+            const imageInput = document.getElementById("imageInput").files[0];
+
+            if (!title || !description || !imageInput || !whatsappNumber || !whatsappText) {
+                alert("All fields are required!");
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imageData = e.target.result;
+
+                localStorage.setItem("title", title);
+                localStorage.setItem("description", description);
+                localStorage.setItem("image", imageData);
+                localStorage.setItem("whatsappNumber", whatsappNumber);
+                localStorage.setItem("whatsappText", whatsappText);
+
+                alert("Updated Successfully! Open Customer Page to see changes.");
+            };
+            reader.readAsDataURL(imageInput);
+        }
+    </script>
+</body>
+</html>
