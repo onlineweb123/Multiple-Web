@@ -51,7 +51,7 @@
 <body>
     <div class="container">
         <h1 id="title">Loading...</h1>
-        <img id="productImage" src="uploads/default.jpg" alt="Product Image">
+        <img id="productImage" src="" alt="Product Image">
         <a id="whatsappButton" class="whatsapp-button" href="#" target="_blank">
             WhatsApp Order
         </a>
@@ -63,13 +63,13 @@
         function loadData() {
             const title = localStorage.getItem("title") || "எங்கள் தயாரிப்பு";
             const description = localStorage.getItem("description") || "இதன் சிறப்பு அம்சங்கள் விரைவில்.";
-            const image = localStorage.getItem("image") || "uploads/default.jpg";
+            const imageName = localStorage.getItem("imageName") || "default.jpg"; // Load Filename
             const whatsappText = localStorage.getItem("whatsappText") || "Sir Order Please";
             const whatsappNumber = localStorage.getItem("whatsappNumber") || "9344165879";
 
             document.getElementById("title").innerText = title;
             document.getElementById("description").innerText = description;
-            document.getElementById("productImage").src = image;
+            document.getElementById("productImage").src = "uploads/" + imageName; // Load from Server
             document.getElementById("whatsappButton").href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappText)}`;
         }
 
